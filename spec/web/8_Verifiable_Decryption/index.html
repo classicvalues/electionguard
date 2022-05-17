@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../../../images/favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.2.4, mkdocs-material-7.2.8" name="generator"/>
+<title>Verifiable Decryption - ElectionGuard</title>
+<link href="../../../assets/stylesheets/main.92558b1b.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.3f5d1f46.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Segoe+UI:300,400,400i,700%7C&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Segoe UI";--md-code-font-family:""}</style>
+<link href="../../../stylesheets/extra.css" rel="stylesheet"/>
+<meta content="website" property="og:type">
+<meta content="ElectionGuard - Verifiable Decryption" property="og:title">
+<meta content="None" property="og:description">
+<meta content="None" property="og:url"/>
+<meta content="https://microsoft.github.io/electionguard/assets/images/electionguard-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="@microsoft" name="twitter:site"/>
+<meta content="ElectionGuard - Verifiable Decryption" name="twitter:title"/>
+<meta content="None" name="twitter:description"/>
+<meta content="https://microsoft.github.io/electionguard/assets/images/electionguard-preview.png" name="twitter:image"/>
+</meta></meta></meta></head>
+<body data-md-color-accent="indigo" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#verifiable-decryption">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="ElectionGuard" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="ElectionGuard">
+<img alt="logo" src="../../../images/electionguard-logo.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            ElectionGuard
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Verifiable Decryption
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/microsoft/electionguard/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../..">
+        Documentation
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../../">
+        Specification
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../contribute/">
+      Contribute
+    </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="ElectionGuard" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="ElectionGuard">
+<img alt="logo" src="../../../images/electionguard-logo.png"/>
+</a>
+    ElectionGuard
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/microsoft/electionguard/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1">
+        Documentation
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Documentation" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" id="__nav_1_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_1">
+        Overview
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Overview" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_1">
+<span class="md-nav__icon md-icon"></span>
+          Overview
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+        What is ElectionGuard?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../overview/Features/">
+        Features
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../overview/Roadmap/">
+        Roadmap
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../overview/Glossary/">
+        Glossary
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" id="__nav_1_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_2">
+        Basics
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Basics" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_2">
+<span class="md-nav__icon md-icon"></span>
+          Basics
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/Introduction/">
+        Introduction
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_2" id="__nav_1_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_2_2">
+        Steps
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Steps" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_1_2_2">
+<span class="md-nav__icon md-icon"></span>
+          Steps
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/0_Configure_Election/">
+        Configure Election
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/1_Key_Ceremony/">
+        Key Ceremony
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/2_Encryption/">
+        Encryption
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/3_Cast_and_Challenge/">
+        Cast and Challenge
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/4_Decryption/">
+        Decryption
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/5_Publish_Record/">
+        Publish Record
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../basics/steps/6_Verification/">
+        Verification
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" id="__nav_1_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_3">
+        Concepts
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Concepts" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_3">
+<span class="md-nav__icon md-icon"></span>
+          Concepts
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Structure_and_Processes/">
+        Structures and Processes
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_2" id="__nav_1_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_3_2">
+        Election Manifest
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Election Manifest" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_1_3_2">
+<span class="md-nav__icon md-icon"></span>
+          Election Manifest
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Manifest_Building/">
+        Building
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Manifest_Example/">
+        Example
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_3" id="__nav_1_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_3_3">
+        Homomorphic
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Homomorphic" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_1_3_3">
+<span class="md-nav__icon md-icon"></span>
+          Homomorphic
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Homomorphic_Aggregation/">
+        Aggregation
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Homomorphic_Encryption/">
+        Encryption
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3_4" id="__nav_1_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_3_4">
+        Verifiability
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Verifiability" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_1_3_4">
+<span class="md-nav__icon md-icon"></span>
+          Verifiability
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Verifiability/">
+        Introduction
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Voter_Verification/">
+        Voter
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../concepts/Verifier/">
+        Verifier
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" id="__nav_1_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_4">
+        Use Cases
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Use Cases" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_4">
+<span class="md-nav__icon md-icon"></span>
+          Use Cases
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../use_cases/Precinct_Scan/">
+        Precinct Scan
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../use_cases/Rescans_and_Recounts/">
+        Rescans and Recounts
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4_3" id="__nav_1_4_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_4_3">
+        Remote Voting
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Remote Voting" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_1_4_3">
+<span class="md-nav__icon md-icon"></span>
+          Remote Voting
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../use_cases/Mail_In/">
+        Mail In
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../use_cases/Electronic_Delivery/">
+        Electronic Delivery
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../use_cases/Audit/">
+        Audit
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" id="__nav_1_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_5">
+        Develop
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Develop" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_1_5">
+<span class="md-nav__icon md-icon"></span>
+          Develop
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Getting_Started/">
+        Getting Started
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Versioning/">
+        Versioning
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Badges/">
+        Badges
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Approach/">
+        Approach
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Architecture/">
+        Architecture
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Repositories/">
+        Repositories
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Applications/">
+        Applications
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_8" id="__nav_1_5_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1_5_8">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Data" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_1_5_8">
+<span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Data_Schema/">
+        Data Schema
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Election_Record/">
+        Election Record
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../develop/Sample_Data/">
+        Sample Data
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+        Specification
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Specification" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Specification
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../">
+        Official
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2">
+        Web
+        <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Web" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span>
+          Web
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../1_Overview/">
+        Overview
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2_ElectionGuard_Structure/">
+        Structure
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../3_ElectionGuard_Components/">
+        Components
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../4_Baseline_Parameters/">
+        Baseline Parameters
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../6_Ballot_Encryption/">
+        Ballot Encryption
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../7_Ballot_Aggregation/">
+        Ballot Aggregation
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Verifiable Decryption
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Verifiable Decryption
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decryption-when-all-guardians-are-present">
+    Decryption when all guardians are present
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decryption-with-missing-guardians">
+    Decryption with missing guardians
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decryption-of-spoiled-ballots">
+    Decryption of spoiled ballots
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../9_Election_Record/">
+        Election Record
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../11_Applications/">
+        Applications
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../12_Acknowledgements/">
+        Acknowledgements
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../contribute/">
+        Contribute
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decryption-when-all-guardians-are-present">
+    Decryption when all guardians are present
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decryption-with-missing-guardians">
+    Decryption with missing guardians
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decryption-of-spoiled-ballots">
+    Decryption of spoiled ballots
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/microsoft/electionguard/edit/master/docs/spec/web/8_Verifiable_Decryption.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="verifiable-decryption">Verifiable Decryption</h1>
+<p>To decrypt an aggregate encryption <span class="arithmatex">\((A, B)\)</span> (or an individual encryption such as one on a spoiled ballot), each available election guardian <span class="arithmatex">\(T_i\)</span> uses its secret key <span class="arithmatex">\(s_i\)</span> to compute its share of the decryption as</p>
+<div class="arithmatex">\[
+M_i = A^{s_i} \bmod p
+\]</div>
+<p>Each guardian <span class="arithmatex">\(T_i\)</span> also publishes a Chaum-Pedersen proof of the correctness of <span class="arithmatex">\(M_i\)</span> as follows.</p>
+<p><u>NIZK Proof by Guardian 𝑇𝑖 of knowledge of <span class="arithmatex">\(s_i \in \mathbb{Z}^r_p\)</span> for which both <span class="arithmatex">\(M_i = A^{s_i} \bmod p\)</span> and <span class="arithmatex">\(K_i = g^{s_i} \bmod p\)</span> </u></p>
+<p>Guardian <span class="arithmatex">\(T_i\)</span> selects a random value <span class="arithmatex">\(u_i\)</span> in <span class="arithmatex">\(\mathbb{Z}_q\)</span> and commits too the pair <span class="arithmatex">\((a_i, b_i) = (g^{u_i} \bmod p, A^{u_i} \bmod p)\)</span>. The values <span class="arithmatex">\((A, B), (a, b)\)</span> and <span class="arithmatex">\(M\)</span> are hashed together with the extended base hash value <span class="arithmatex">\(\overline{Q}\)</span> t
+to form a challenge value <span class="arithmatex">\(c_i = H(\overline{Q}, (A, B), (a_i, b_i), M)\)</span>, and the guardian <span class="arithmatex">\(T_i\)</span> responds with <span class="arithmatex">\(v_i = (u_i + c_i s_i) \bmod q\)</span>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An election verifier must then confirm for each (non-placeholder) option in each contest in the ballot coding ffile the following for each decrypting guardian <span class="arithmatex">\(T_i\)</span>:</p>
+<p>(A) The given value <span class="arithmatex">\(v_i\)</span> is in the set <span class="arithmatex">\(\mathbb{Z}_q^r\)</span></p>
+<p>(B) The given values <span class="arithmatex">\(a_i\)</span> and <span class="arithmatex">\(b_i\)</span> are both in the set <span class="arithmatex">\(\mathbb{Z}_q^r\)</span></p>
+<p>(C) The challenge value <span class="arithmatex">\(c_i\)</span> satisfies <span class="arithmatex">\(c_i = H(\overline{Q}, (A, B), (a_i, b_i), M)\)</span>.</p>
+<p>(D) The equation <span class="arithmatex">\(g^{v_i} \bmod p = (a_i K_i^{c_i}) \bmod p\)</span> is satisfied.</p>
+<p>(E) The equation <span class="arithmatex">\(A^{v_i} \bmod p = (b_i M_i^{c_i}) \bmod p\)</span> is satisfied.</p>
+</div>
+<h2 id="decryption-when-all-guardians-are-present">Decryption when all guardians are present</h2>
+<p>If all guardians are present and have posted suitable proofs, the next step is to publish the
+value</p>
+<div class="arithmatex">\[
+M = B / (\prod_{i=1}^n M_i) \bmod p.
+\]</div>
+<p>This <span class="arithmatex">\(M\)</span> has the property that <span class="arithmatex">\(M = g_t \bmod p\)</span> where <span class="arithmatex">\(t\)</span> is the tally of the associated option.</p>
+<p>In general, computation of this tally value <span class="arithmatex">\(t\)</span> is computationally intractable. However, in this application, <span class="arithmatex">\(t\)</span> is relatively small - bounded by the number of votes cast. Election administrators can determine this tally value <span class="arithmatex">\(t\)</span> from <span class="arithmatex">\(M\)</span> by exhaustive search, by precomputing a table of all possible <span class="arithmatex">\(M\)</span> values in the allowable range and then performing a single look-up, or by a combination in which some exponentiations are precomputed and a small search is used to find the value of <span class="arithmatex">\(t\)</span> (e.g., a partial table consisting of <span class="arithmatex">\(g^{100} \bmod p, g^{200} \bmod p, g^{300} \bmod p\)</span> … is precomputed and the value <span class="arithmatex">\(M\)</span> is repeatedly divided by <span class="arithmatex">\(g\)</span> until a value is found that is in the partial table). The value <span class="arithmatex">\(t\)</span> is published in the election record, and verifiers  should check both that <span class="arithmatex">\(M = g^t \bmod p\)</span> and that <span class="arithmatex">\(B = (M \cdot \prod^n_{i=1} M_i) \bmod p\)</span>.</p>
+<h2 id="decryption-with-missing-guardians">Decryption with missing guardians</h2>
+<p>If one or more of the election guardians are not available for decryption, any <span class="arithmatex">\(k\)</span> available
+guardians can use the information they have to reconstruct the partial decryptions for missing
+guardians as follows.</p>
+<p>If guardian <span class="arithmatex">\(T_i\)</span> is missing during decryption, each of at least <span class="arithmatex">\(k\)</span> available guardians <span class="arithmatex">\(T_\ell\)</span> should use its share <span class="arithmatex">\(P_i(\ell)\)</span> of the secret value <span class="arithmatex">\(s_i\)</span> previously shared by <span class="arithmatex">\(T_i\)</span> to compute a share of the missing partial decryption <span class="arithmatex">\(M_i\)</span> in the same way that it used its own secret <span class="arithmatex">\(s_\ell\)</span>. Specifically, guardian <span class="arithmatex">\(T_\ell\)</span> publishes partial decryption share</p>
+<div class="arithmatex">\[
+M_{i, \ell} = A^{P_i(\ell)} \bmod p
+\]</div>
+<p>Guardian <span class="arithmatex">\(T_\ell\)</span> also publishes a Chaum-Pedersen proof of the correctness of <span class="arithmatex">\(M_{i, \ell}\)</span> as follows.</p>
+<p><u>NIZK Proof by Guardian <span class="arithmatex">\(T_\ell\)</span> of knowledge of <span class="arithmatex">\(s_{i, \ell} \in \mathbb{Z}^r_p\)</span> for which both <span class="arithmatex">\(M_{i, \ell} = A^{s_{i, \ell}} \bmod p\)</span> and <span class="arithmatex">\(g^{s_i} \bmod p = \prod^{k=1}_{j=0}K^{\ell^j}_{i, j} \bmod p\)</span></u></p>
+<p>Guardian <span class="arithmatex">\(T_\ell\)</span> selects a random value <span class="arithmatex">\(u_{i, \ell}\)</span> in <span class="arithmatex">\(\mathbb{Z}_q\)</span> and commits to the pair <span class="arithmatex">\((a_{i, \ell}, b_{i, \ell}) = (g^{u_{i, \ell}} \bmod p, A^{u_{i, \ell}} \bmod p)\)</span>. The values <span class="arithmatex">\((A, B)\)</span>, <span class="arithmatex">\((a_{i, \ell}, b_{i, \ell})\)</span>, and <span class="arithmatex">\(M_{i, \ell}\)</span> are hashed together with the extended base hash value <span class="arithmatex">\(\bar{Q}\)</span> to form a challenge value <span class="arithmatex">\(c_{i, \ell} = H(\bar{Q}, (A, B), (a_{i, \ell}, b_{i, \ell}), M_{i, \ell})\)</span>, and the guardian <span class="arithmatex">\(T_\ell\)</span> responds with <span class="arithmatex">\(v_{i, \ell} = (u_{i, \ell} + c_{i, \ell} P_i(\ell)) \bmod q\)</span>.</p>
+<p>It is important to note here that although the value <span class="arithmatex">\(P_i(\ell)\)</span> is known to both the missing guardian <span class="arithmatex">\(T_i\)</span> and the guardian <span class="arithmatex">\(T_\ell\)</span>, it need not published or generally known. However, the value <span class="arithmatex">\(g^{P_i(\ell)} \bmod p\)</span> can be computer form public values as</p>
+<div class="arithmatex">\[
+g^{P_i(\ell)} \bmod p = \prod_{j=0}^{k-1} K^{\ell^j}_{i, j} \bmod p.
+\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An election verifier must confirm for each (non-placeholder) option in each contest in the ballot coding file the following for each missing guardian <span class="arithmatex">\(T_i\)</span> and for each surrogate guardian <span class="arithmatex">\(T_\ell\)</span>.</p>
+<p>(A) The given value <span class="arithmatex">\(v_{i, \ell}\)</span> is in the set <span class="arithmatex">\(\mathbb{Z}_q\)</span>.</p>
+<p>(B) The given values <span class="arithmatex">\(a_{i, \ell}\)</span> and <span class="arithmatex">\(b_{i, \ell}\)</span> are both in the set <span class="arithmatex">\(\mathbb{Z}_q^r\)</span>.</p>
+<p>(C) The challenge value <span class="arithmatex">\(c_{i, \ell}\)</span> satisfies <span class="arithmatex">\(c_{i, \ell} = H(\bar{Q}, (A, B), (a_{i, \ell}, b_{i, \ell}), M_{i, \ell})\)</span>.</p>
+<p>(D) The equation <span class="arithmatex">\(g^{v_{i, \ell}} \bmod p = (a_{i, \ell} K_{i, \ell}^{c_{i, \ell}}) \bmod p\)</span> is satisfied.</p>
+<p>(E) The equation <span class="arithmatex">\(A^{v_{i, \ell}} \bmod p = (b_{i, \ell} M_{i, \ell}^{c_{i, \ell}}) \bmod p\)</span> is satisfied.</p>
+</div>
+<p>The final step to reconstruct a missing partial decryption <span class="arithmatex">\(M_i\)</span> is to compute Lagrange coefficients for a set of <span class="arithmatex">\(k\)</span> available guardians <span class="arithmatex">\(\{ T_\ell:\ell \in U \}\)</span> with <span class="arithmatex">\(|U| = k\)</span> as</p>
+<div class="arithmatex">\[
+w_\ell = \frac{(\prod_{j \in (U - \{\ell\})}j)}{(\prod_{j \in (U - \{\ell\}))}(j - \ell))} \bmod q.
+\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An election verifier should confirm that for each guardian <span class="arithmatex">\(T_\ell\)</span> serving to help compute a missing share of a tally, that its Lagrange coefficient <span class="arithmatex">\(w_\ell\)</span> is correctly computer by confirming the equation <span class="arithmatex">\((\prod_{j\in(U = \{\ell\})} j) \bmod q = (w_\ell (\prod_{j \in (U - \{\ell\})} (j-\ell))) \bmod q\)</span>.</p>
+<p>An election verifier should then confirm the correcty missing tally share for each (non-placeholder) option in each contest in the ballot coding file for each missing guardian <span class="arithmatex">\(T_i\)</span> as <span class="arithmatex">\(M_i = \prod_{\ell \in U} (M_{i, \ell})^{w_\ell} \bmod p\)</span>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note that the missing secret <span class="arithmatex">\(s_i\)</span> could be computed directly as <span class="arithmatex">\(s_i = \sum_{\ell \in U}w_\ell P_i(\ell) \bmod q\)</span>. However, it is preferable to not release the missing secret and instead only release the partial decryption that the missing secret would have produced. This prevents the missing secret <span class="arithmatex">\(s_i\)</span> from being used for additional decryptions without the cooperation of at least <span class="arithmatex">\(k\)</span> guardians.</p>
+<p>As an example, consider an election with five guardians and a threshold of three. If two guardians are missing at the time of decryption, the remaining three can perform any required decryption, the remaining three can perform any required decryptions by constructing missing partial descriptions as described in the text above. If, instead, they take the shortcut of simply reconstructing and then using the two missing secrets, then any of the three could, at a later time, use its own secret together with the two reconstructed secrets to perform additional decryptions without cooperation of any other guardian.</p>
+</div>
+<p>The final step is to verify the tallies themselves.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An election verifier should confirm the following equations for each (non-placeholder) option in each contest in the ballot coding file.</p>
+<p>(A) <span class="arithmatex">\(B = (M (\prod^n_{i=i} M_i)) \bmod p\)</span>.</p>
+<p>(B) <span class="arithmatex">\(M = g^t \bmod p\)</span>.</p>
+<p>An election verifier should also confirm that the text labels listed in the election record match the corresponding text labels in the ballot coding file.</p>
+</div>
+<h2 id="decryption-of-spoiled-ballots">Decryption of spoiled ballots</h2>
+<p>Every ballot spoiled in an election is individually verifiably decrypted in exactly the same way that the aggregate ballot of tallies is decrypted. Election verifiers should confirm all such decryptions so that casual observers can simply view the decryptions and confirm that they match their expectations.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An election verifier should confirm the correct decryption of each spoiled ballot using the same process that was used to confirm the election tallies.</p>
+<p>An election verifier should also confirm that for each decrypted spoiled ballot, the selections listed in text match the corresponding text in the ballot coding file.</p>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav aria-label="Footer" class="md-footer-nav__inner md-grid">
+<a class="md-footer-nav__link md-footer-nav__link--prev" href="../7_Ballot_Aggregation/" rel="prev" title="Ballot Aggregation">
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Ballot Aggregation
+              </div>
+</div>
+</a>
+<a class="md-footer-nav__link md-footer-nav__link--next" href="../9_Election_Record/" rel="next" title="Election Record">
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Election Record
+              </div>
+</div>
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a> and <a href="https://icons8.com/" rel="noopener" target="_blank">
+          Icons8
+        </a>
+</div>
+<div class="md-footer-copyright" style="display: flex; align-items:center;">
+<ul style="list-style: none;">
+<li><a href="https://privacy.microsoft.com">Privacy</a></li>
+<li><a href="">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.94ec81fe.min.js", "version": null}</script>
+<script src="../../../assets/javascripts/bundle.48dfec6c.min.js"></script>
+<script src="../../../javascripts/analytics.js"></script>
+<script src="../../../javascripts/config.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
